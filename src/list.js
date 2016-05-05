@@ -16,7 +16,7 @@ module.exports = function list(args, callback) {
     const appRoot = process.env['RN_PROJECT_ROOT'];
     log.heading = 'rsx-platforms ls';
 
-    const xcodeprojFile = 'ios/' + appRoot.split('/').pop() + '.xcodeproj';
+    const xcodeprojFile = 'ios/' + appRoot.split(path.sep).pop() + '.xcodeproj';
     const androidGradleFile = 'android/build.gradle';
 
     if (checkForFile(xcodeprojFile)) {
