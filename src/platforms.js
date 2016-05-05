@@ -7,32 +7,20 @@ log.heading = 'rsx-platforms';
 
 const appRoot = process.env['RN_PROJECT_ROOT'];
 
-const actions = [
-  'add',
-  'rm',
-  'ls',
-];
+const actions = {
+  'add': require('./add'),
+  'rm': require('./list'),
+  'ls': require('./list'),
+};
 
 module.exports = function platforms(args, callback) {
 
-  const action     = args[0];
+  const action       = args[0];
   const platformName = args[1];
 
-  if (actions.indexOf(action) !== -1) {
+  if (Object.keys(actions).indexOf(action) !== -1) {
 
-    switch(action) {
-      case 'add':
-        // addPlatform(platformName);
-        break;
-      case 'rm':
-        // removePlatform(platformName);
-        break;
-      case 'ls':
-      default:
-        listPlatforms();
-        break;
-    }
-
+    actions[action](platformName);
     return;
 
   }
