@@ -1,7 +1,7 @@
 {
   "name": "rsx-plugin-platforms",
   "version": "0.1.0",
-  "description": "",
+  "description": "A project platform installer plugin for the RSX CLI utility",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/react-native-contrib/rsx-plugin-platforms#readme",
   "dependencies": {
-    "rsx-common": "^0.1.0",
+    "rsx-common": "^0.1.1",
+    "rsx-generator-android": "^0.1.0",
+    "rsx-generator-ios": "^0.1.0",
     "yeoman-environment": "^1.6.1"
   }
 }

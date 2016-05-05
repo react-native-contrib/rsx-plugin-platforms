@@ -1,23 +1,22 @@
 const utils = require('rsx-common');
 const path = require('path');
-const yo = require('yeoman-environment');
+const yeoman = require('yeoman-environment');
 const log = utils.log;
 
-
-
 module.exports = function add(args, callback) {
-    const appRoot = process.env['RN_PROJECT_ROOT'];
     log.heading = 'rsx-platforms add';
+    const appRoot = process.env['RN_PROJECT_ROOT'];
+    const oldRoot = process.cwd();
+    process.chdir(appRoot);
 
+    const name = appRoot.split(path.sep).pop();
     const platform = args;
 
-    const env = yo.createEnv();
-    const generatorPath = path.join(__dirname, 'generator-' + platform);
-    env.register(generatorPath, 'react:app');
-
-    // const args = ['react:app', name].concat(process.argv.slice(4));
-    env.run(args, function() {
-        process.chdir(oldCwd);
+    const env = yeoman.createEnv();
+    env.register(require.resolve('rsx-generator-ios'), 'rsx:ios');
+    env.register(require.resolve('rsx-generator-android'), 'rsx:android');
+    env.run(['rsx:' + platform, name], () => {
+        log.info('The ' + platform + ' platform has been added to ' + appRoot);
+        process.chdir(oldRoot);
     });
-
 }
