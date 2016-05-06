@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/react-native-contrib/rsx-plugin-platforms#readme",
   "dependencies": {
+    "rimraf": "^2.5.2",
     "rsx-common": "^0.1.1",
     "rsx-generator-android": "^0.1.0",
     "rsx-generator-ios": "^0.1.0",

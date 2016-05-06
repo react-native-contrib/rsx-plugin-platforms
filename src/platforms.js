@@ -9,8 +9,8 @@ const appRoot = process.env['RN_PROJECT_ROOT'];
 
 const actions = {
   'add': require('./add'),
-  'rm': require('./list'),
   'ls': require('./list'),
+    'rm': require('./remove'),
 };
 
 module.exports = function platforms(args, callback) {
