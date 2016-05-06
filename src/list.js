@@ -9,15 +9,28 @@ module.exports = function list(args, callback) {
     const name    = utils.path.getProjectFolderName(appRoot);
 
     const files = {
-        android: path.join(appRoot, 'android', 'app', 'src', 'main', 'AndroidManifest.xml'),
-        ios: path.join(appRoot, 'ios', name + '.xcodeproj'),
+        android: ['app', 'src', 'main', 'AndroidManifest.xml'],
+        ios: [`${name}.xcodeproj`],
     };
 
-    files.forEach((file, platform) => {
-        if (utils.isFile(file)) {
-            log.info(`The ${platform} platform was found`);
+    const found  = [];
+    const errors = [];
+
+    Object.keys(files).forEach((platform) => {
+        const platformPath = path.join(appRoot, platform);
+        try {
+            if (utils.path.isDirectory(platformPath)) {
+                log.info(`The ${platform} platform was found`);
+                found.push(platform);
+            }
+        } catch (e) {
+            errors.push(e);
         }
     });
 
-    if (callback) { callback(); }
+    if (found.length === 0) {
+        log.info('No platforms were found');
+    }
+
+    if (callback) { callback(found, errors); }
 };
