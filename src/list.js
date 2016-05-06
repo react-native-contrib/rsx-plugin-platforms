@@ -1,29 +1,23 @@
 const utils = require('rsx-common');
-const path = require('path');
-const log = utils.log;
+const path  = require('path');
 
-const checkForFile = (file) => {
-    try {
-        utils.fileExists(file);
-        return true;
-    } catch (e) {
-        console.error(e);
-    }
-    return false;
-}
+const log     = utils.log;
 
 module.exports = function list(args, callback) {
-    const appRoot = process.env['RN_PROJECT_ROOT'];
-    log.heading = 'rsx-platforms ls';
+    log.heading   = 'rsx-platforms ls';
+    const appRoot = process.env.RN_PROJECT_ROOT;
+    const name    = utils.path.getProjectFolderName(appRoot);
 
-    const xcodeprojFile = 'ios/' + appRoot.split(path.sep).pop() + '.xcodeproj';
-    const androidGradleFile = 'android/build.gradle';
+    const files = {
+        android: path.join(appRoot, 'android', 'app', 'src', 'main', 'AndroidManifest.xml'),
+        ios: path.join(appRoot, 'ios', name + '.xcodeproj'),
+    };
 
-    if (checkForFile(xcodeprojFile)) {
-        log.info('iOS project found');
-    }
+    files.forEach((file, platform) => {
+        if (utils.isFile(file)) {
+            log.info(`The ${platform} platform was found`);
+        }
+    });
 
-    if (checkForFile(androidGradleFile)) {
-        log.info('Android project found');
-    }
-}
+    if (callback) { callback(); }
+};
