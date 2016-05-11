@@ -1,6 +1,6 @@
 {
   "name": "rsx-plugin-platforms",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A project platform installer plugin for the RSX CLI utility",
   "main": "index.js",
   "scripts": {
