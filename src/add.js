@@ -7,6 +7,7 @@ const log   = utils.log;
 const registerGenerators = (env) => {
     env.register(require.resolve('rsx-generator-ios'), 'rsx:ios');
     env.register(require.resolve('rsx-generator-android'), 'rsx:android');
+    return env;
 };
 
 module.exports = function add(args, callback) {
