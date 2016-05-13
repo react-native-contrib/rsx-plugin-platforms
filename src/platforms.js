@@ -13,7 +13,13 @@ module.exports = function platforms(args, callback) {
     const platform = args[1];
 
     if (Object.keys(actions).indexOf(action) === -1) {
-        log.error(`${action} is not a valid action for this command`);
+
+        try {
+            throw Error(`${action} is not a valid action for this command`);
+        } catch(e) {
+            log.error(e.message);
+        }
+
         return;
     }
 
