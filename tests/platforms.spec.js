@@ -54,7 +54,20 @@ describe('platforms', () => {
 
     describe('add', () => {
 
-        it('should add a platform project for React Native');
+        it('should add a platform project for React Native', () => {
+            mock('yeoman-environment', {
+                getEnv:  {
+                    run: (name, callback) => {  callback(name); },
+                },
+            });
+
+            const command = require('../src/add');
+            const spy = sinon.spy();
+            command(['react-native-video'], spy);
+
+            expect(spy.calledOnce).to.equals(true);
+            mock.stop('rsx-common');
+        });
     });
 
     describe('rm', () => {
