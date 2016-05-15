@@ -1,3 +1,5 @@
+'use strict';
+
 const utils = require('rsx-common');
 const log = utils.log;
 

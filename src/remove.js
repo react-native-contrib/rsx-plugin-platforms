@@ -1,6 +1,8 @@
+'use strict';
+
 const utils  = require('rsx-common');
 const path   = require('path');
-const rimraf = require('rimraf');
+let rimraf = require('rimraf');
 
 const log = utils.log;
 

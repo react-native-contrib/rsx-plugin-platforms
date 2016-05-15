@@ -1,8 +1,10 @@
-const utils  = require('rsx-common');
-const path   = require('path');
-const yeoman = require('yeoman-environment');
+'use strict';
 
-const log   = utils.log;
+let utils  = require('rsx-common');
+let path   = require('path');
+let yeoman = require('yeoman-environment');
+
+let log   = utils.log;
 
 const registerGenerators = (env) => {
     env.register(require.resolve('rsx-generator-ios'), 'rsx:ios');

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = [{
     func: require('./src/platforms'),
     description: 'Interact with target platforms',
