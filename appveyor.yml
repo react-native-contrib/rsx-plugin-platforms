@@ -14,8 +14,7 @@ install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node $env:nodejs_version
   # install modules
-  - node_modules/.bin/eslint index.js src/ tests/
-  - node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha --recursive tests/
+  - npm install
 
 # Post-install test scripts.
 test_script:
@@ -23,7 +22,8 @@ test_script:
   - node --version
   - npm --version
   # run tests
-  - npm test
+  - node_modules/.bin/eslint index.js src/ tests/
+  - node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha --recursive tests/
 
 # Don't actually build.
 build: off
