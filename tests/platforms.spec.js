@@ -39,7 +39,7 @@ describe('platforms', () => {
 
         it('should show a list of installed platforms', () => {
             process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures', 'platform-project');
-            var result;
+            let result;
             const command = require('../src/list');
             command({}, (platforms) => {
                 result = platforms;
@@ -50,13 +50,16 @@ describe('platforms', () => {
 
         it('should return an empty array if no installed platforms are found', () => {
             process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures', 'no-platform-project');
-            var result;
+            let result;
+            let errors;
             const command = require('../src/list');
-            command({}, (platforms) => {
+            command({}, (platforms, err) => {
                 result = platforms;
+                errors = err;
             });
 
             expect(result).to.deep.equals([]);
+            expect(errors.length).to.deep.equals(2);
         });
 
     });
