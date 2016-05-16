@@ -30,7 +30,6 @@
     "istanbul": "^0.4.3",
     "mocha": "^2.4.5",
     "rewire": "^2.5.1",
-    "sinon": "^1.17.4",
-    "yeoman-generator": "^0.23.3"
+    "sinon": "^1.17.4"
   }
 }
