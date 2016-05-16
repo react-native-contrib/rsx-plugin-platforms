@@ -11,8 +11,8 @@ const actions = {
 
 module.exports = function platforms(args, callback) {
     log.heading    = 'rsx-platforms';
-    const action   = args[0];
-    const platform = args[1];
+    let action   = args[0];
+    let platform = args[1];
 
     if (Object.keys(actions).indexOf(action) === -1) {
 

@@ -14,13 +14,13 @@ const registerGenerators = (env) => {
 
 module.exports = function add(args, callback) {
     log.heading    = 'rsx-platforms add';
-    const platform = args;
-    const rootPath = process.cwd();
-    const appRoot  = process.env.RN_PROJECT_ROOT;
-    const name     = path.basename(appRoot);
+    let platform = args;
+    let rootPath = process.cwd();
+    let appRoot  = process.env.RN_PROJECT_ROOT;
+    let name     = path.basename(appRoot);
     process.chdir(appRoot);
 
-    const env = registerGenerators(yeoman.createEnv());
+    let env = registerGenerators(yeoman.createEnv());
     env.run([`rsx:${platform}`, name], () => {
         log.info(`The ${platform} platform has been added to ${appRoot}`);
         process.chdir(rootPath);

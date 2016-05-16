@@ -1,25 +1,25 @@
 'use strict';
 
-const utils = require('rsx-common');
-const path  = require('path');
+let utils = require('rsx-common');
+let path  = require('path');
 
-const log     = utils.log;
+let log     = utils.log;
 
 module.exports = function list(args, callback) {
     log.heading   = 'rsx-platforms ls';
-    const appRoot = process.env.RN_PROJECT_ROOT;
-    const name    = path.basename(appRoot);
+    let appRoot = process.env.RN_PROJECT_ROOT;
+    let name    = path.basename(appRoot);
 
-    const files = {
+    let files = {
         android: ['app', 'src', 'main', 'AndroidManifest.xml'],
         ios: [`${name}.xcodeproj`],
     };
 
-    const found  = [];
-    const errors = [];
+    let found  = [];
+    let errors = [];
 
     Object.keys(files).forEach((platform) => {
-        const platformPath = path.join(appRoot, platform);
+        let platformPath = path.join(appRoot, platform);
         try {
             if (utils.path.isDirectory(platformPath)) {
                 log.info(`The ${platform} platform was found`);

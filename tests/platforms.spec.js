@@ -17,8 +17,8 @@ describe('platforms', () => {
 
         it('should throw an error if an invalid action is specified', () => {
             process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures');
-            const spy = sinon.spy();
-            const command = require('../src/platforms');
+            let spy = sinon.spy();
+            let command = require('../src/platforms');
             command(['pppppp'], spy);
 
             expect(spy.called).to.be.false;
@@ -26,8 +26,8 @@ describe('platforms', () => {
 
         it('should execute the subcommand if a valid action is specified', () => {
             process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures', 'platform-project');
-            const spy = sinon.spy();
-            const command = require('../src/platforms');
+            let spy = sinon.spy();
+            let command = require('../src/platforms');
             command(['ls'], spy);
 
             expect(spy.calledOnce).to.be.true;
@@ -40,7 +40,7 @@ describe('platforms', () => {
         it('should show a list of installed platforms', () => {
             process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures', 'platform-project');
             let result;
-            const command = require('../src/list');
+            let command = require('../src/list');
             command({}, (platforms) => {
                 result = platforms;
             });
@@ -52,7 +52,7 @@ describe('platforms', () => {
             process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures', 'no-platform-project');
             let result;
             let errors;
-            const command = require('../src/list');
+            let command = require('../src/list');
             command({}, (platforms, err) => {
                 result = platforms;
                 errors = err;
@@ -79,7 +79,7 @@ describe('platforms', () => {
                 },
             });
 
-            const spy = sinon.spy();
+            let spy = sinon.spy();
             commandMock('ios', spy);
 
             expect(spy.calledOnce).to.be.true;
