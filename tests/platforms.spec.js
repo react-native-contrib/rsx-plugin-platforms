@@ -1,19 +1,19 @@
 'use strict';
 
-const utils = require('rsx-common');
-const chai = require('chai');
-const rewire = require('rewire');
-const sinon = require('sinon');
-const path = require('path');
+let utils = require('rsx-common');
+let chai = require('chai');
+let rewire = require('rewire');
+let sinon = require('sinon');
+let path = require('path');
 
-const expect = chai.expect;
-const log = utils.log;
+let expect = chai.expect;
+let log = utils.log;
 
 log.level = 'silent';
 
 describe('platforms', () => {
 
-    describe('error conditions', () => {
+    describe('main', () => {
 
         it('should throw an error if an invalid action is specified', () => {
             process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures');
@@ -25,7 +25,7 @@ describe('platforms', () => {
         });
 
         it('should execute the subcommand if a valid action is specified', () => {
-            process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures');
+            process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures', 'platform-project');
             const spy = sinon.spy();
             const command = require('../src/platforms');
             command(['ls'], spy);
@@ -38,7 +38,7 @@ describe('platforms', () => {
     describe('ls', () => {
 
         it('should show a list of installed platforms', () => {
-            process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures');
+            process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures', 'platform-project');
             var result;
             const command = require('../src/list');
             command({}, (platforms) => {
@@ -48,12 +48,23 @@ describe('platforms', () => {
             expect(result).to.deep.equals(['android', 'ios']);
         });
 
+        it('should return an empty array if no installed platforms are found', () => {
+            process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures', 'no-platform-project');
+            var result;
+            const command = require('../src/list');
+            command({}, (platforms) => {
+                result = platforms;
+            });
+
+            expect(result).to.deep.equals([]);
+        });
+
     });
 
     describe('add', () => {
 
         it('should add a platform project for React Native', () => {
-            process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures');
+            process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures', 'no-platform-project');
 
             let commandMock = rewire('../src/add');
             commandMock.__set__('yeoman', {
@@ -75,7 +86,7 @@ describe('platforms', () => {
     describe('rm', () => {
 
         it('should remove a platform project for React Native', () => {
-            process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures');
+            process.env.RN_PROJECT_ROOT = path.join(__dirname, 'fixtures', 'platform-project');
 
             let commandMock = rewire('../src/remove');
             let rimrafSpy   = sinon.spy();

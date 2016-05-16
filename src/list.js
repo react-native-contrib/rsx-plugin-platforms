@@ -8,7 +8,7 @@ const log     = utils.log;
 module.exports = function list(args, callback) {
     log.heading   = 'rsx-platforms ls';
     const appRoot = process.env.RN_PROJECT_ROOT;
-    const name    = utils.path.getProjectFolderName(appRoot);
+    const name    = path.basename(appRoot);
 
     const files = {
         android: ['app', 'src', 'main', 'AndroidManifest.xml'],

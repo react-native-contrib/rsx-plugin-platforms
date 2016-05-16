@@ -17,7 +17,7 @@ module.exports = function add(args, callback) {
     const platform = args;
     const rootPath = process.cwd();
     const appRoot  = process.env.RN_PROJECT_ROOT;
-    const name     = utils.path.getProjectFolderName(appRoot);
+    const name     = path.basename(appRoot);
     process.chdir(appRoot);
 
     const env = registerGenerators(yeoman.createEnv());

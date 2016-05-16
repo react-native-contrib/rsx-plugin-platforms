@@ -1,10 +1,10 @@
 'use strict';
 
-const utils  = require('rsx-common');
-const path   = require('path');
+let utils  = require('rsx-common');
+let path   = require('path');
 let rimraf = require('rimraf');
 
-const log = utils.log;
+let log = utils.log;
 
 const del = (platformPath) => {
     if (utils.path.isDirectory(platformPath)) {
