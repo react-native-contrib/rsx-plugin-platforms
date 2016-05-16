@@ -21,7 +21,7 @@ describe('platforms', () => {
             const command = require('../src/platforms');
             command(['pppppp'], spy);
 
-            expect(spy.calledWith('pppppp is not a valid action for this command'));
+            expect(spy.called).to.be.false;
         });
 
         it('should execute the subcommand if a valid action is specified', () => {
@@ -30,7 +30,7 @@ describe('platforms', () => {
             const command = require('../src/platforms');
             command(['ls'], spy);
 
-            expect(spy.calledOnce).to.deep.equals(true);
+            expect(spy.calledOnce).to.be.true;
         });
 
     });
@@ -45,7 +45,7 @@ describe('platforms', () => {
                 result = platforms;
             });
 
-            expect(result).to.deep.equals(['android', 'ios']);
+            expect(result).to.eql(['android', 'ios']);
         });
 
         it('should return an empty array if no installed platforms are found', () => {
@@ -58,8 +58,8 @@ describe('platforms', () => {
                 errors = err;
             });
 
-            expect(result).to.deep.equals([]);
-            expect(errors.length).to.deep.equals(2);
+            expect(result).to.be.empty;
+            expect(errors).to.have.length.of(2);
         });
 
     });
@@ -82,7 +82,7 @@ describe('platforms', () => {
             const spy = sinon.spy();
             commandMock('ios', spy);
 
-            expect(spy.calledOnce).to.deep.equals(true);
+            expect(spy.calledOnce).to.be.true;
         });
     });
 
@@ -100,8 +100,8 @@ describe('platforms', () => {
 
             commandMock('ios', callbackSpy);
 
-            expect(rimrafSpy.calledOnce).to.deep.equals(true);
-            expect(callbackSpy.calledOnce).to.deep.equals(true);
+            expect(rimrafSpy.calledOnce).to.be.true;
+            expect(callbackSpy.calledOnce).to.be.true;
         });
 
     });
